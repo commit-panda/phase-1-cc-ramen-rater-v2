@@ -3,6 +3,12 @@
 // Callbacks
 const handleClick = (ramen) => {
   // Add code
+  document.getElementById('new-ramen').addEventListener("submit", (e) => {
+    e.preventDefault
+    const newRamen = 
+
+  })
+
 };
 
 const addSubmitListener = () => {
@@ -14,8 +20,8 @@ const displayRamens = () => {
 };
 
 const main = () => {
-  // Invoke displayRamens here
-  // Invoke addSubmitListener here
+  displayRamens()
+  addSubmitListener()
 }
 
 main()
