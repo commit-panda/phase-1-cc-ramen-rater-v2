@@ -1,18 +1,16 @@
 // index.js
 
-const baseUrl = 'http://localhost:3000/ramens'
-
 
 
 // Callbacks
 const handleClick = (ramen) => {
   // Add code
 
-    const name = document.getElementById("new-name")
-    const restaurant = document.getElementById("new-restaurant")
-    const image = document.getElementById("new-image")
-    const rating = document.getElementById("new-rating") 
-    const comment = document.getElementById("new-comment")
+    const name = document.querySelector(".name")
+    const restaurant = document.querySelector(".restaurant")
+    const image = document.querySelector(".detail-image")
+    const rating = document.getElementById("rating-display") 
+    const comment = document.getElementById("comment-display")
 
     name.textContent = ramen.name
     restaurant.textContent = ramen.restaurant
@@ -24,13 +22,17 @@ const handleClick = (ramen) => {
 
 const addSubmitListener = () => {
   // Add code
-  document.getElementById('new-ramen').addEventListener("submit", handleClick())
+  const newRamen = document.getElementById('new-ramen')
+  newRamen.addEventListener("submit", (e) => {
+    e.preventDefault()
+    
+  })
 
 }
 
 const displayRamens = () => {
   // Add code
-  fetch(`${baseUrl}`)
+  fetch('http://localhost:3000/ramens')
   .then(res => res.json())
   .then(data => {
     const ramenMenu = document.getElementById('ramen-menu')
@@ -42,12 +44,12 @@ const displayRamens = () => {
       ramenMenu.appendChild(img)
     })
 
-    
+    if(data.length > 0){
+      handleClick(data[0])
+    }
    
   })
   .catch((err) => console.error('Problem fetching image', err))
-
-  
 
 };
 
