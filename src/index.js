@@ -33,13 +33,19 @@ const displayRamens = () => {
   fetch(`${baseUrl}`)
   .then(res => res.json())
   .then(data => {
+    const ramenMenu = document.getElementById('ramen-menu')
     data.forEach((ramen) => {
-       document.getElementById('ramen-menu').innerHTML = `
-    <img src=${data.image}>
-    `
+      const img = document.createElement('img')
+      img.src = ramen.image
+      img.alt = ramen.name
+      img.addEventListener("click", () => handleClick(ramen))
+      ramenMenu.appendChild(img)
     })
+
+    
    
   })
+  .catch((err) => console.error('Problem fetching image', err))
 
   
 
