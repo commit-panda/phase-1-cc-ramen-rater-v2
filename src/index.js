@@ -22,7 +22,7 @@ const addSubmitListener = () => {
 
 const displayRamens = () => {
   // Add code
-  
+  document.getElementById("ra")
 
 };
 
