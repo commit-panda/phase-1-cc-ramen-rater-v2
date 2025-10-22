@@ -25,7 +25,32 @@ const addSubmitListener = () => {
   const newRamen = document.getElementById('new-ramen')
   newRamen.addEventListener("submit", (e) => {
     e.preventDefault()
-    
+
+    const addRamen = 
+    {
+      name: e.target['new-name'].value,
+      restaurant: e.target['new-restaurant'].value,
+      image: e.target['new-image'].value,
+      rating: e.target['new-rating'].value,
+      comment: e.target['new-comment'].value
+    }
+
+    fetch("http://localhost:3000/ramens", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addRamen),
+    })
+    .then(res => res.json())
+    .then(newRamen => {
+      const ramenMenu = document.getElementById("ramen-menu");
+      const img = document.createElement("img");
+      img.src = newRamen.image;
+      img.alt = newRamen.name;
+      img.addEventListener("click", () => handleClick(newRamen));
+      ramenMenu.appendChild(img);
+    })
+    .catch((err) => console.error("Error adding ramen:", err));
+
   })
 
 }
